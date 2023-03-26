@@ -2,7 +2,7 @@
 #include <httplib.h>
 #include <nlohmann/json.hpp>
 
-namespace libai {
+namespace rjsj_ai {
 
 class Ai {
     std::string token;

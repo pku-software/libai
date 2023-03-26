@@ -1,11 +1,11 @@
 #include "./ai_impl.h"
 
-using libai::Ai;
+using rjsj_ai::Ai;
 
 extern "C" {
 
 Ai* ai_create(const char* token) {
-    return new libai::Ai(token);
+    return new Ai(token);
 }
 int ai_send(Ai* ai, int type, const char* prompt) {
     return ai->send(type, prompt);

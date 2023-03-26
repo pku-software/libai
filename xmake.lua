@@ -1,6 +1,6 @@
 add_requires("cpp-httplib", "nlohmann_json", "base-n")
 
-target("libai")
+target("rjsjai")
     set_kind("static")
     add_packages("cpp-httplib", "nlohmann_json", "base-n")
     add_files("src/*.cpp")
@@ -11,10 +11,13 @@ target("libai")
     if is_plat("windows") then
         add_cxflags("/utf-8")
     end
+    if is_os("windows") then
+        add_links("Ws2_32")
+    end
 
 target("test")
     set_kind("binary")
-    add_deps("libai")
+    add_deps("rjsjai")
     add_files("test/*.cpp")
     set_languages("c++17")
     set_targetdir("bin")

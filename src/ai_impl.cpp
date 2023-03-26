@@ -4,11 +4,11 @@
 #include <iterator>
 
 #include "./api_def.h"
-#include "libai.h"
+#include "rjsjai.h"
 
 using namespace std::literals;
 
-namespace libai {
+namespace rjsj_ai {
 
 Ai::Ai(const char* token)
     : token(token), cli(HOST, PORT), errorCode{AI_ERROR_MISUSE_NOT_SENT} {
