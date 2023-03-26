@@ -25,7 +25,8 @@ extern "C" {
 #define AI_ERROR_MISUSE_NOT_SENT 256
 #define AI_ERROR_MISUSE_UNKNOWN_TYPE 257
 
-struct AI;
+struct AI_;
+typedef struct AI_ AI;
 
 AI* ai_create(const char* token);
 int ai_send(AI* ai, int type, const char* prompt);

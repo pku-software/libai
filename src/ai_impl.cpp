@@ -11,9 +11,7 @@ using namespace std::literals;
 namespace libai {
 
 Ai::Ai(const char* token)
-    : token(token),
-      cli(HOST, PORT),
-      errorCode{AI_ERROR_MISUSE_NOT_SENT} {
+    : token(token), cli(HOST, PORT), errorCode{AI_ERROR_MISUSE_NOT_SENT} {
     httplib::Headers headers;
     headers.insert({"Authorization", "Basic "s + token});
     cli.set_default_headers(headers);
@@ -22,7 +20,8 @@ Ai::Ai(const char* token)
 std::string getHttpErrorDetail(httplib::Error e) {
     switch (e) {
         case httplib::Error::Unknown: return "Unknown HTTP error"s;
-        case httplib::Error::Connection: return "Failed to establish HTTP connection"s;
+        case httplib::Error::Connection:
+            return "Failed to establish HTTP connection"s;
         case httplib::Error::BindIPAddress: return "Failed to bind IP address"s;
         case httplib::Error::Read: return "Error while reading HTTP contents"s;
         case httplib::Error::Write: return "Error while writing HTTP contents"s;
@@ -33,10 +32,12 @@ std::string getHttpErrorDetail(httplib::Error e) {
     }
 }
 
-bool decodeDataUrl(std::string url, std::string& result) {
+bool decodeDataUrl(const std::string& url, std::string& result) {
+#ifdef __cpp_lib_starts_ends_with
     if (!url.starts_with("data:")) {
         return false;
     }
+#endif
     auto semicolon = url.find(";base64,");
     if (semicolon == std::string::npos) {
         return false;
