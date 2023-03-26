@@ -1,0 +1,12 @@
+build
+.xmake
+bin
+lib
+
+.cache
+compile_commands.json
+
+
+.vscode/*
+!.vscode/tasks.json
+!.vscode/launch.json
