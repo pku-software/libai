@@ -16,13 +16,14 @@ permissions:
 jobs:
   build:
     strategy:
+      fail-fast: false
       matrix:
         include:
           - os: windows-latest
             platform: windows
             arch: x64
           - os: windows-latest
-            platform: mingw
+            platform: mingw --mingw=C:/ProgramData/chocolatey
             arch: x86_64
           - os: macos-latest
             platform: macosx
