@@ -42,7 +42,7 @@ jobs:
 
       - run: xmake f -p ${{ matrix.platform }} -a ${{ matrix.arch }} -y
       - run: xmake b -y
-      - run: zip package.zip includes\ lib\
+      - run: zip -r package.zip includes\ lib\
       - uses: actions/upload-artifact@v3
         with:
           name: rjsjai-${{ matrix.platform }}-${{ matrix.arch }}
