@@ -13,7 +13,7 @@ namespace rjsj_ai {
 Ai::Ai(const char* token)
     : token(token), cli(HOST, PORT), errorCode{AI_ERROR_MISUSE_NOT_SENT} {
     httplib::Headers headers;
-    headers.insert({"Authorization", "Basic "s + token});
+    headers.insert({"Authorization", "Bearer "s + token});
     cli.set_default_headers(headers);
 }
 
@@ -95,14 +95,14 @@ void Ai::sendRequest(const char* path, nlohmann::json body, bool isImage) {
         }
         if (!response[propName].is_string()) {
             errorCode = AI_ERROR_RESPONSE_MALFORMED;
-            error = propName + " property is not a string"s;
+            error = propName + " property is not a string: "s + nlohmann::to_string(response[propName]);
             return false;
         }
         return true;
     };
     if (isImage) {
-        if (!checkPayload("encoded_image")) return;
-        if (!decodeDataUrl(response["encoded_image"], this->response)) {
+        if (!checkPayload("decoded_image")) return;
+        if (!decodeDataUrl(response["decoded_image"], this->response)) {
             errorCode = AI_ERROR_RESPONSE_INVALID_DATA;
             error = "Response contains an invalid data url"s;
             return;

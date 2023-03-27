@@ -17,11 +17,7 @@
 
 #define DRAW_PATH "/api/v1/ai/draw"
 
-#define DRAW_BODY(prompt)               \
-    nlohmann::json({{"prompt", prompt}, \
-                    {"number", 1},      \
-                    {"width", 1024},    \
-                    {"height", 1024}})
+#define DRAW_BODY(prompt) nlohmann::json({{"prompt", prompt}, {"kind", "1"}})
 
 #define WOLFRAM_PATH "/api/v1/ai/wolfram"
 
