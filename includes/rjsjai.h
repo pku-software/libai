@@ -1,5 +1,5 @@
-#ifndef LIBAI_H
-#define LIBAI_H
+#ifndef RJSJAI_H
+#define RJSJAI_H
 
 #ifdef __cplusplus
 extern "C" {
