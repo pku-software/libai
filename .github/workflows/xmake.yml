@@ -23,7 +23,8 @@ jobs:
             platform: windows
             arch: x64
           - os: windows-latest
-            platform: mingw --mingw=C:/ProgramData/chocolatey
+            platform: mingw
+            extra_args: --mingw=C:/ProgramData/chocolatey
             arch: x86_64
           - os: macos-latest
             platform: macosx
@@ -40,10 +41,11 @@ jobs:
         with:
           xmake-version: latest
 
-      - run: xmake f -p ${{ matrix.platform }} -a ${{ matrix.arch }} -y
+      - run: xmake f -p ${{ matrix.platform }} -a ${{ matrix.arch }} -y ${{ matrix.extra_args }}
       - run: xmake b -y
-      - run: 7z a package.zip includes\ lib\
       - uses: actions/upload-artifact@v3
         with:
           name: rjsjai-${{ matrix.platform }}-${{ matrix.arch }}
-          path: package.zip
+          path: |
+            includes\*
+            lib\*
