@@ -47,5 +47,5 @@ jobs:
         with:
           name: rjsjai-${{ matrix.platform }}-${{ matrix.arch }}
           path: |
-            includes\*
-            lib\*
+            includes/*
+            lib/*
