@@ -15,6 +15,7 @@ Ai::Ai(const char* token)
     httplib::Headers headers;
     headers.insert({"Authorization", "Bearer "s + token});
     cli.set_default_headers(headers);
+    cli.set_read_timeout(30);
 }
 
 std::string getHttpErrorDetail(httplib::Error e) {
@@ -28,6 +29,12 @@ std::string getHttpErrorDetail(httplib::Error e) {
         case httplib::Error::ExceedRedirectCount:
             return "Maximum count of HTTP redirection exceeded"s;
         case httplib::Error::Canceled: return "HTTP connection cancelled"s;
+        case httplib::Error::SSLConnection:
+            return "Failed to establish SSL connection"s;
+        case httplib::Error::SSLLoadingCerts:
+            return "Failed to load SSL certification"s;
+        case httplib::Error::SSLServerVerification:
+            return "Failed to verify SSL server"s;
         default: return "Internal error: unsupported HTTP error"s;
     }
 }
@@ -95,14 +102,15 @@ void Ai::sendRequest(const char* path, nlohmann::json body, bool isImage) {
         }
         if (!response[propName].is_string()) {
             errorCode = AI_ERROR_RESPONSE_MALFORMED;
-            error = propName + " property is not a string: "s + nlohmann::to_string(response[propName]);
+            error = propName + " property is not a string: "s +
+                    nlohmann::to_string(response[propName]);
             return false;
         }
         return true;
     };
     if (isImage) {
-        if (!checkPayload("decoded_image")) return;
-        if (!decodeDataUrl(response["decoded_image"], this->response)) {
+        if (!checkPayload("image")) return;
+        if (!decodeDataUrl(response["image"], this->response)) {
             errorCode = AI_ERROR_RESPONSE_INVALID_DATA;
             error = "Response contains an invalid data url"s;
             return;
@@ -151,4 +159,4 @@ int Ai::writeResult(char* dest) const {
     }
 }
 
-}  // namespace libai
+}  // namespace rjsj_ai

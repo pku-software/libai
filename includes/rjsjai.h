@@ -19,20 +19,23 @@ extern "C" {
 #define AI_ERROR_HTTP_REDIRECT_COUNT_EXCEEDED 6
 #define AI_ERROR_HTTP_CANCELED 7
 #define AI_ERROR_HTTP_CONNECTION_TIMEOUT 13
+#define AI_ERROR_HTTPS_CONNECTION 14
+#define AI_ERROR_HTTPS_CERTIFICATE 15
+#define AI_ERROR_HTTPS_VERIFICATION 16
 #define AI_ERROR_RESPONSE_MALFORMED 128
 #define AI_ERROR_RESPONSE_FAILED 129
 #define AI_ERROR_RESPONSE_INVALID_DATA 130
 #define AI_ERROR_MISUSE_NOT_SENT 256
 #define AI_ERROR_MISUSE_UNKNOWN_TYPE 257
 
-struct AI_;
-typedef struct AI_ AI;
+struct RJSJAI_;
+typedef struct RJSJAI_ RJSJAI;
 
-AI* ai_create(const char* token);
-int ai_send(AI* ai, int type, const char* prompt);
-int ai_status(AI* ai);
-int ai_result(AI* ai, char* dest);
-void ai_free(AI* ai);
+RJSJAI* ai_create(const char* token);
+int ai_send(RJSJAI* ai, int type, const char* prompt);
+int ai_status(RJSJAI* ai);
+int ai_result(RJSJAI* ai, char* dest);
+void ai_free(RJSJAI* ai);
 
 #ifdef __cplusplus
 }  // extern "C"

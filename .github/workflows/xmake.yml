@@ -7,8 +7,8 @@ on:
     branches: [main]
 
 env:
-  SERVER_HOST: ${{ secrets.SERVER_HOST }}
-  SERVER_PORT: ${{ secrets.SERVER_PORT }}
+  SERVER_HOST: ai.leavelet.io
+  SERVER_PORT: 443
 
 permissions:
   contents: write

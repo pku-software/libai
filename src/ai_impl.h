@@ -9,7 +9,7 @@ class Ai {
     std::string response;
     int errorCode;
     std::string error;
-    httplib::Client cli;
+    httplib::SSLClient cli;
 
     void sendRequest(const char* path, nlohmann::json body, bool isImage);
 
