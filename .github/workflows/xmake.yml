@@ -7,8 +7,8 @@ on:
     branches: [main]
 
 env:
-  SERVER_HOST: ai.leavelet.io
-  SERVER_PORT: 443
+  SERVER_HOST: ai.lcpu.dev
+  SERVER_PORT: 80
 
 permissions:
   contents: write
