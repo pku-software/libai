@@ -148,12 +148,12 @@ int Ai::getError() const {
 int Ai::writeResult(char* dest) const {
     if (errorCode) {
         if (dest) {
-            std::memcpy(dest, error.c_str(), error.size() + 1);
+            std::memcpy(dest, error.c_str(), error.size());
         }
         return error.size();
     } else {
         if (dest) {
-            std::memcpy(dest, response.c_str(), response.size() + 1);
+            std::memcpy(dest, response.c_str(), response.size());
         }
         return response.size();
     }
