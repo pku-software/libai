@@ -10,9 +10,6 @@ target("rjsjai")
     set_targetdir("lib")
     if is_plat("windows") then
         add_cxflags("/utf-8")
-        add_ldflags("/MT")
-    else
-        add_ldflags("-static")
     end
     if is_os("windows") then
         add_links("Ws2_32")
